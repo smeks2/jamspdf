@@ -1,24 +1,22 @@
-# JAMS PDF Reader v1.1 — Print & Auto Scan
+# JAMS PDF Reader v1.2 (Android)
 
-Android Java app, no ads, no analytics, no login, no INTERNET permission. Min Android 8.0 (API 26).
+Source upgrade from v1.1. Android Java, no advertisements or account.
 
-## Features
-- Open PDF with Android Storage Access Framework; page navigation and zoom.
-- Share original PDF using Android share sheet.
-- Print original PDF through Android Print Framework (printer/service support required).
-- Camera document scanning using full-resolution image capture, **lightweight heuristic auto-crop**, multi-page PDF output, and save via system picker.
+## Implemented
+- Open PDF through Android document picker and VIEW intent.
+- Vertical multi-page rendering and horizontal swipe in Flip mode.
+- Two-finger pinch zoom (up to 5x), plus zoom buttons.
+- Android system-bar safe insets; labeled buttons.
+- Print via Android PrintManager, share original PDF URI.
+- Camera capture, post-capture heuristic crop, multipage scan-to-PDF.
+- GitHub Actions debug APK build.
 
-## Important limitations
-- Auto Scan estimates rectangular document boundaries from image edge contrast; **not** a perspective-correcting, ML-based document scanner. Busy backgrounds, tilted documents and shadows may yield inaccurate crops. Check output before saving.
-- Searchable text, OCR, manual crop adjustment, PDF merging and continuous scrolling are **not implemented**.
-- Printing passes original PDF to the system print spooler. Some print services may not support this passthrough or requested page ranges; test with your printer.
-- Camera app must support `ACTION_IMAGE_CAPTURE` and `EXTRA_OUTPUT`.
-- No APK is included. Build is configured but has not been run in this environment.
+## Known limitations
+- Live edge tracking, automatic shutter, perspective correction, and reliable auto-orientation are **not yet implemented**. Scanner remains post-capture heuristic crop.
+- PDF rendering currently eagerly renders pages; large PDFs may use excessive RAM. Lazy page rendering is needed for production use.
+- Pinch zoom redraws full document; may be slow on large files. Rendering quality and gesture conflicts need device testing.
+- No OCR or search, no thumbnails or last-page memory yet.
+- APK build has not been verified in this environment. Upload to GitHub and inspect Actions output.
 
-## GitHub build
-1. Create a new GitHub repository and upload **the contents** of this folder, including hidden `.github`.
-2. Go to **Actions > Build JAMS PDF Reader APK > Run workflow**, or push to main.
-3. After successful run, open the run > **Artifacts** > download `JAMS-PDF-Reader-v1.1-debug-APK`.
-4. Extract APK from artifact zip and install on Android (allow installation from trusted source).
-
-Debug APK is for testing, not signed production release. Gradle 8.9, Android Gradle Plugin 8.7.3, Java 17, SDK 35. Dependencies are downloaded during cloud build; the app itself requires no network.
+## Build
+Upload all extracted files to the root of the GitHub repository, including hidden `.github` folder. Workflow: `.github/workflows/android-apk.yml`. In Actions download `JAMS-PDF-Reader-v1.2-debug-APK` artifact after successful build.
