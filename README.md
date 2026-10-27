@@ -1,22 +1,13 @@
-# JAMS PDF Reader v1.2 (Android)
+# JAMS PDF Reader v1.4 — Teaching Edition
 
-Source upgrade from v1.1. Android Java, no advertisements or account.
+Android Java source project based on v1.3. Includes PDF page swipe, pinch zoom, rotate via Android orientation, automatic reader menu hide, print, share, camera scan with post-capture crop, and freehand teaching annotations.
 
-## Implemented
-- Open PDF through Android document picker and VIEW intent.
-- Vertical multi-page rendering and horizontal swipe in Flip mode.
-- Two-finger pinch zoom (up to 5x), plus zoom buttons.
-- Android system-bar safe insets; labeled buttons.
-- Print via Android PrintManager, share original PDF URI.
-- Camera capture, post-capture heuristic crop, multipage scan-to-PDF.
-- GitHub Actions debug APK build.
+## Annotation
 
-## Known limitations
-- Live edge tracking, automatic shutter, perspective correction, and reliable auto-orientation are **not yet implemented**. Scanner remains post-capture heuristic crop.
-- PDF rendering currently eagerly renders pages; large PDFs may use excessive RAM. Lazy page rendering is needed for production use.
-- Pinch zoom redraws full document; may be slow on large files. Rendering quality and gesture conflicts need device testing.
-- No OCR or search, no thumbnails or last-page memory yet.
-- APK build has not been verified in this environment. Upload to GitHub and inspect Actions output.
+Open a PDF, choose **TULIS** to enter writing mode. In writing mode, one finger draws on the PDF page, with red/blue/green pen and a translucent yellow freehand highlighter. **UNDO** and **REDO** affect the currently selected page. Press **TULIS** again to return to reader gestures. Use **SIMPAN NOTA** to export a new flattened PDF with drawings.
 
-## Build
-Upload all extracted files to the root of the GitHub repository, including hidden `.github` folder. Workflow: `.github/workflows/android-apk.yml`. In Actions download `JAMS-PDF-Reader-v1.2-debug-APK` artifact after successful build.
+Annotations are held in memory until exported; they are not embedded into the source PDF and are not persisted across app restarts. Highlighter is freehand, **not** selectable-text highlighting. For the best results, use page flip mode while annotating. Scanning still uses post-capture crop, **not live edge detection**.
+
+## GitHub APK
+
+Upload extracted files to the repository root. GitHub Actions workflow `.github/workflows/android-apk.yml` builds `:app:assembleDebug` and uploads the APK as an artifact. This source was not compiled or device-tested in this environment.
