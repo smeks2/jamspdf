@@ -1,3 +1,7 @@
+# JAMS PDF Reader v1.5.1 PRO — BuildConfig Hotfix
+
+This patch fixes the GitHub Actions Java compilation error `cannot find symbol: BuildConfig` by enabling `buildFeatures { buildConfig true }` in `app/build.gradle`. `versionName` is now `1.5.1` and `versionCode` is `7`. The About screen version note and artifact name are updated. All other application source files are carried over from v1.5. This is source code, not a verified APK.
+
 # JAMS PDF Reader v1.5 — PRO Teaching Edition (source preview)
 
 Coded by J-AIms. Android Java, offline, no ads.
