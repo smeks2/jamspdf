@@ -1,13 +1,24 @@
-# JAMS PDF Reader v1.4 — Teaching Edition
+# JAMS PDF Reader v1.5 — PRO Teaching Edition (source preview)
 
-Android Java source project based on v1.3. Includes PDF page swipe, pinch zoom, rotate via Android orientation, automatic reader menu hide, print, share, camera scan with post-capture crop, and freehand teaching annotations.
+Coded by J-AIms. Android Java, offline, no ads.
 
-## Annotation
+## Included
+- PDF reader with swipe flip, scroll, pinch zoom and page navigation
+- Android system print/share; camera capture + post-capture AutoCrop (not live edge tracking)
+- Pen/highlight with adjustable stroke size, undo/redo, PDF export (flattened)
+- Signature drawing pad, internal PNG library, signature placement presets and PDF export (flattened image signature)
+- Persisted SAF document URI and last page for reopening when Android grants persistent access
+- Back navigation confirmation, app exit confirmation, Android system insets, app icon
+- GitHub Actions debug APK workflow
 
-Open a PDF, choose **TULIS** to enter writing mode. In writing mode, one finger draws on the PDF page, with red/blue/green pen and a translucent yellow freehand highlighter. **UNDO** and **REDO** affect the currently selected page. Press **TULIS** again to return to reader gestures. Use **SIMPAN NOTA** to export a new flattened PDF with drawings.
+## Known limitations / not implemented
+- This is a source preview, **not build-tested in this environment**. GitHub Actions must compile and device testing is required.
+- PRO licensing, biometrics, per-signature naming, import PNG, drag-to-resize, live scanner edge tracking, and multi-page automatic signature application are **not implemented**.
+- Annotations/signatures are held in memory until exported. The signature PNG library is saved locally, but page placements and ink are not restored after process death.
+- Scanning uses Android camera and crops after capture; inspect the crop before saving.
+- Export produces flattened rasterized PDF pages; text selection and existing PDF interactive elements may not be preserved.
 
-Annotations are held in memory until exported; they are not embedded into the source PDF and are not persisted across app restarts. Highlighter is freehand, **not** selectable-text highlighting. For the best results, use page flip mode while annotating. Scanning still uses post-capture crop, **not live edge detection**.
+## Build
+Upload all project files to your GitHub repository root. Actions > Build JAMS PDF Reader APK > Run workflow, then download the artifact.
 
-## GitHub APK
-
-Upload extracted files to the repository root. GitHub Actions workflow `.github/workflows/android-apk.yml` builds `:app:assembleDebug` and uploads the APK as an artifact. This source was not compiled or device-tested in this environment.
+Do not publish as a production release before build verification, PDF compatibility testing, and privacy/security review.
